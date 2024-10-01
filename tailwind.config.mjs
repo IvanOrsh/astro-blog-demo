@@ -1,4 +1,5 @@
 import defaultTheme from "tailwindcss/defaultTheme";
+import colors from "tailwindcss/colors";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,6 +8,11 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Cabin", ...defaultTheme.fontFamily.sans],
+      },
+
+      colors: {
+        primary: colors.teal, // brand color (key visual)
+        secondary: colors.zinc, // muted? for secondary
       },
     },
   },
