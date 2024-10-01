@@ -10,9 +10,11 @@ export default {
         sans: ["Cabin", ...defaultTheme.fontFamily.sans],
       },
 
+      // TODO: figure out better color pallette
       colors: {
         primary: colors.teal, // brand color (key visual)
         secondary: colors.zinc, // muted? for secondary
+        tertiary: colors.green, // is it?
       },
     },
   },
