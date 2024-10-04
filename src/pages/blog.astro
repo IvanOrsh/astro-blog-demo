@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 
-import Layout from "../layouts/Layout.astro";
-import PostList from "../components/PostList.astro";
-import Main from "../components/Main.astro";
+import Layout from "@layouts/Layout.astro";
+import PostList from "@components/PostList.astro";
+import Main from "@components/Main.astro";
 
 const allPosts = await getCollection("posts");
 /*
@@ -26,7 +26,6 @@ const allPosts = await getCollection("posts");
     <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
       Here is the place for some description, 10 to 15 words max.
     </p>
+    <PostList posts={allPosts} />
   </Main>
-
-  <PostList posts={allPosts} />
 </Layout>
