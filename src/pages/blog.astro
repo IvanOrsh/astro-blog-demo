@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
+
+const allPosts = await getCollection("posts");
+
+console.log(allPosts);
+
+/*
+
+    data: {
+      author: 'dwight-schrute',
+      categories: [Array],
+      date: 'August 10, 2021',
+      featured: false,
+      image: [Object],
+      title: 'Behind-the-scenes with our artists'
+    },
+
+*/
+---
+
+<Layout title="Blog - Astro Course">
+
+  <main class="px-24 max-sm:px-5 max-w-7xl mx-auto w-full">
+    <h1 class="text-6xl text-primary-900 font-bold mb-5">Blog Title</h1>
+    <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">Here is the place for some description, 10 to 15 words max.</p>
+
+    {
+      allPosts.map(post => <h1>{post.data.title}</h1>)
+    }
+
+  </main>
+
+</Layout>
