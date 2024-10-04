@@ -16,6 +16,10 @@ export default {
         secondary: colors.zinc, // muted? for secondary
         tertiary: colors.green, // is it?
       },
+
+      aspectRatio: {
+        thumbnail: "1.5", // height : width ratio
+      },
     },
   },
   plugins: [],
