@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import PostList from "@components/PostList.astro";
 import Main from "@components/Main.astro";
+import H1 from "@components/H1.astro";
 
 const allPosts = await getCollection("posts");
 /*
@@ -22,7 +23,7 @@ const allPosts = await getCollection("posts");
 
 <Layout title="Blog - Astro Course">
   <Main>
-    <h1 class="text-6xl text-primary-900 font-bold mb-5">Blog Title</h1>
+    <H1 text="Blog Title" />
     <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
       Here is the place for some description, 10 to 15 words max.
     </p>
