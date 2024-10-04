@@ -1,3 +1,5 @@
+import typography from "@tailwindcss/typography";
+
 import defaultTheme from "tailwindcss/defaultTheme";
 import colors from "tailwindcss/colors";
 
@@ -22,5 +24,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
