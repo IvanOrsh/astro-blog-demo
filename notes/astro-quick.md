@@ -125,3 +125,43 @@ In Astro, content collections typically reside in the `src/content` directory. H
      ))}
    </ul>
    ```
+
+### 4. Static output
+
+1. Create a folder (ouf your choice) with the following structure:
+
+`/blog/[slug].astro`
+
+2. Create dynamic routes for blog posts
+
+`[slug].astro`:
+
+```astro
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection("posts");
+
+  const paths = posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+
+    props: {
+      post,
+    },
+  }));
+
+  return paths;
+};
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+---
+
+{post.data.title}
+```
