@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 import Layout from "@layouts/Layout.astro";
 import Main from "@components/Main.astro";
+import H1 from "@components/H1.astro";
 
 export const getStaticPaths = async () => {
   const posts = await getCollection("posts");
@@ -25,8 +26,40 @@ interface Props {
 }
 
 const { post } = Astro.props;
+
+const { Content, headings } = await post.render();
+
+/*
+  data: {
+    author: 'dwight-schrute',
+    categories: [ 'studio tips' ],
+    date: 'August 10, 2021',
+    featured: false,
+    image: {
+      src: '/@fs/media/ruoja/a60420cf-e882-4f70-9ae7-dabd1878e3c2/Temp/Astro/Astro-Quick/astro-blog-demo/src/content/posts/images/photoshoot.jpg?origWidth=5867&origHeight=3911&origFormat=jpg',
+      width: 5867,
+      height: 3911,
+      format: 'jpg',
+      fsPath: '/media/ruoja/a60420cf-e882-4f70-9ae7-dabd1878e3c2/Temp/Astro/Astro-Quick/astro-blog-demo/src/content/posts/images/photoshoot.jpg'
+    },
+    title: 'Behind-the-scenes with our artists'
+  },
+*/
 ---
 
 <Layout title={post.data.title}>
-  <Main />
+  <Main>
+    <a href="/blog" class="text-secondary-500 text-2xl mb-16 underline block"
+      >← Back to all blogs</a
+    >
+
+    <H1 text={post.data.title} />
+    <img
+      src={post.data.image.src}
+      alt={post.data.title}
+      class="rounded-2xl shadow-xl mb-28 aspect-thumbnail object-cover"
+    />
+
+    <Content />
+  </Main>
 </Layout>
