@@ -340,3 +340,5 @@ const {
   </body>
 </html>
 ```
+
+### 7. RSS feed
