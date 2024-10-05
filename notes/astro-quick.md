@@ -236,3 +236,107 @@ what can we expect from page?
   </Main>
 </Layout>
 ```
+
+### 6. SEO #TODO: more stuff required!
+
+"OG" tags, short for **Open Graph** tags, are meta tags used in the HTML of a webpage to control how content is displayed when shared on social media platforms like Facebook, Twitter, LinkedIn, and others. They aren't HTML tags like `<div>` or `<p>`, but rather **meta tags** that exist in the `<head>` section of a webpage. Open Graph was introduced by Facebook but is now widely supported across different platforms.
+
+---
+
+**What Do OG Tags Do?**
+OG tags define structured data about the webpage, allowing control over:
+
+- **Title**: What title appears when shared.
+- **Description**: The summary or description of the content.
+- **Image**: A specific image that appears in the preview.
+- **URL**: The canonical URL to which the share should link.
+
+---
+
+**Common OG Tags**
+Here are some of the key Open Graph meta tags:
+
+1. **`og:title`**: The title of your page or content.
+   ```html
+   <meta property="og:title" content="Amazing Website Title" />
+   ```
+2. **`og:description`**: A short description that will appear beneath the title.
+   ```html
+   <meta
+     property="og:description"
+     content="A brief summary of what this page is about."
+   />
+   ```
+3. **`og:image`**: The URL of the image you want to display in the preview.
+   ```html
+   <meta property="og:image" content="https://example.com/image.jpg" />
+   ```
+4. **`og:url`**: The canonical URL that people will be directed to.
+   ```html
+   <meta property="og:url" content="https://example.com/page" />
+   ```
+
+---
+
+**Importance for SEO and Social Sharing**
+While OG tags don't directly affect search engine rankings (like Google), they are crucial for **social media sharing**. If properly implemented:
+
+- They help attract more clicks by providing well-structured, appealing previews.
+- They prevent social platforms from picking random content for the preview, ensuring a consistent brand image.
+
+OG tags ensure that when your content is shared, it looks professional, with the right image and text displayed.
+
+---
+
+```astro
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import "@fontsource/cabin";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = "Blog description is expected here",
+  image = "/images/drums.png",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- og -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={description} />
+
+    <!-- for twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+    <meta property="twitter:image:alt" content={description} />
+  </head>
+  <body class="min-h-screen grid grid-rows-[auto,1fr,auto]">
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+```
