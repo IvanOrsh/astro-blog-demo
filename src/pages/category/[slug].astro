@@ -1,0 +1,85 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+import H1 from "@components/H1.astro";
+import Main from "@components/Main.astro";
+import Layout from "@layouts/Layout.astro";
+import CategoryList from "@components/CategoryList.astro";
+import Pagination from "@components/Pagination.astro";
+import PostList from "@components/PostList.astro";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("posts");
+
+  const allCategories = posts.flatMap((post) => post.data.categories);
+  const categoeries = Array.from(new Set(allCategories));
+
+  const paths = categoeries.map((category) => {
+    const postsByCategory = posts.filter((post) =>
+      post.data.categories.includes(category),
+    );
+
+    return {
+      params: {
+        slug: category,
+      },
+      props: {
+        category,
+        posts: postsByCategory,
+      },
+    };
+  });
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+  category: string;
+  posts: CollectionEntry<"posts">[];
+}
+
+const { category, posts } = Astro.props;
+---
+
+<Layout
+  title="Blog - Astro Course"
+  description="Read and learn from professionals and enthusiasts"
+>
+  <Main>
+    <a href="/blog" class="text-secondary-500 text-2xl mb-16 underline block"
+      >← Back to all blogs</a
+    >
+    <H1 text="Blog Title" />
+    <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
+      Here is the place for some description, 10 to 15 words max.
+    </p>
+
+    <!-- tags -->
+    <div
+      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
+    >
+      <h2 class="font-bold text-5xl text-primary-900">Posts tagged</h2>
+      <CategoryList categories={[category]} />
+    </div>
+
+    <!-- pagination  -->
+    {
+      posts.length > 6 && (
+        <div class="mb-12">
+          <Pagination nextURL={`/category/${category}/2`} />
+        </div>
+      )
+    }
+    <PostList posts={posts.slice(0, 6)} />
+
+    {
+      posts.length > 6 && (
+        <div class="mb-36">
+          <Pagination nextURL={`/category/${category}/2`} />
+        </div>
+      )
+    }
+  </Main>
+</Layout>

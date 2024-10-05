@@ -1,0 +1,99 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+import H1 from "@components/H1.astro";
+import Main from "@components/Main.astro";
+import PostList from "@components/PostList.astro";
+import Layout from "@layouts/Layout.astro";
+import Pagination from "@components/Pagination.astro";
+import CategoryList from "@components/CategoryList.astro";
+
+export const getStaticPaths = async ({ paginate }) => {
+  const posts = await getCollection("posts");
+  const allCategories = posts.flatMap((post) => post.data.categories);
+  const categoeries = Array.from(new Set(allCategories));
+
+  return categoeries.flatMap((category) => {
+    const postsByCategory = posts.filter((post) =>
+      post.data.categories.includes(category),
+    );
+
+    return paginate(postsByCategory, {
+      params: { category },
+      pageSize: 6,
+    });
+  });
+};
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const params = Astro.params;
+
+const posts = page.data as CollectionEntry<"posts">[];
+const allCategories = posts.flatMap((post) => post.data.categories);
+const categories = Array.from(new Set(allCategories));
+
+/*
+what can we expect from page?
+
+ data: [
+ {
+  // ...
+ },
+  // ...
+ ],
+
+  start: 0,
+  end: 5,
+  size: 6,
+  total: 10,
+  currentPage: 1,
+  lastPage: 2,
+  url: {
+    current: '/blog/1',
+    next: '/blog/2',
+    prev: undefined,
+    first: undefined,
+    last: '/blog/2'
+  }
+}
+*/
+---
+
+<Layout
+  title="Blog - Astro Course"
+  description="Read and learn from professionals and enthusiasts"
+>
+  <Main>
+    <a href="/blog" class="text-secondary-500 text-2xl mb-16 underline block"
+      >← Back to all blogs</a
+    >
+    <H1 text="Blog Title" />
+    <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
+      Here is the place for some description, 10 to 15 words max.
+    </p>
+
+    <!-- tags -->
+    <div
+      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
+    >
+      <h2 class="font-bold text-5xl text-primary-900">Posts tagged</h2>
+      <CategoryList categories={categories} />
+    </div>
+
+    <div class="mb-12">
+      <Pagination prevURL={page.url.prev} nextURL={page.url.next} />
+    </div>
+
+    <PostList {posts} />
+
+    <div class="mb-36">
+      <Pagination prevURL={page.url.prev} nextURL={page.url.next} />
+    </div>
+  </Main>
+</Layout>
