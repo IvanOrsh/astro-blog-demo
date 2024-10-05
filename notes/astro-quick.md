@@ -165,3 +165,74 @@ const { post } = Astro.props;
 
 {post.data.title}
 ```
+
+### 5. Pagination (from docs)
+
+- Paginated route names should **use the same `[bracket]` syntax as a standard dynamic route**.
+- You can use `paginate()` function to generate these pages for an array of values:
+
+`/pages/blog/[page].astro`:
+
+```astro
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+import H1 from "@components/H1.astro";
+import Main from "@components/Main.astro";
+import PostList from "@components/PostList.astro";
+import Layout from "@layouts/Layout.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection("posts");
+
+  return paginate(allPosts, {
+    pageSize: 6,
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const posts = page.data as CollectionEntry<"posts">[];
+
+/*
+what can we expect from page?
+
+ data: [
+ {
+  // ...
+ },
+  // ...
+ ],
+
+  start: 0,
+  end: 5,
+  size: 6,
+  total: 10,
+  currentPage: 1,
+  lastPage: 2,
+  url: {
+    current: '/blog/1',
+    next: '/blog/2',
+    prev: undefined,
+    first: undefined,
+    last: '/blog/2'
+  }
+}
+*/
+---
+
+<Layout title="Blog - Astro Course">
+  <Main>
+    <H1 text="Blog Title" />
+    <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
+      Here is the place for some description, 10 to 15 words max.
+    </p>
+    <PostList {posts} />
+  </Main>
+</Layout>
+```
