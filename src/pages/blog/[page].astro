@@ -7,6 +7,7 @@ import H1 from "@components/H1.astro";
 import Main from "@components/Main.astro";
 import PostList from "@components/PostList.astro";
 import Layout from "@layouts/Layout.astro";
+import Pagination from "@components/Pagination.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getCollection("posts");
@@ -56,6 +57,15 @@ what can we expect from page?
     <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
       Here is the place for some description, 10 to 15 words max.
     </p>
+
+    <div class="mb-12">
+      <Pagination prevURL={page.url.prev} nextURL={page.url.next} />
+    </div>
+
     <PostList {posts} />
+
+    <div class="mb-36">
+      <Pagination prevURL={page.url.prev} nextURL={page.url.next} />
+    </div>
   </Main>
 </Layout>
