@@ -1,0 +1,14 @@
+---
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+---
+
+<a
+  href={`/category/${category}`}
+  class="p-2 text-primary-900 rounded-3xl uppercase border-2 border-primary-900 whitespace-nowrap"
+>
+  {category}
+</a>

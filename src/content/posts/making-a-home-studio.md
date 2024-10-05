@@ -1,6 +1,6 @@
 ---
 author: dwight-schrute
-categories: ["studio tips"]
+categories: ["studio tips", "testing"]
 date: 08/10/2021
 featured: false
 image: ./images/studio.jpg

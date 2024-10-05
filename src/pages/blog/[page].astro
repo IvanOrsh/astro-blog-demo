@@ -8,6 +8,7 @@ import Main from "@components/Main.astro";
 import PostList from "@components/PostList.astro";
 import Layout from "@layouts/Layout.astro";
 import Pagination from "@components/Pagination.astro";
+import CategoryList from "@components/CategoryList.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getCollection("posts");
@@ -23,6 +24,8 @@ interface Props {
 
 const { page } = Astro.props;
 const posts = page.data as CollectionEntry<"posts">[];
+const allCategories = posts.flatMap((post) => post.data.categories);
+const categories = Array.from(new Set(allCategories));
 
 /*
 what can we expect from page?
@@ -60,6 +63,14 @@ what can we expect from page?
     <p class="text-secondary-900 text-2xl mb-24 max-sm:mb-14">
       Here is the place for some description, 10 to 15 words max.
     </p>
+
+    <!-- tags -->
+    <div
+      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
+    >
+      <h2 class="font-bold text-5xl text-primary-900">Fags</h2>
+      <CategoryList categories={categories} />
+    </div>
 
     <div class="mb-12">
       <Pagination prevURL={page.url.prev} nextURL={page.url.next} />
