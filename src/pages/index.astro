@@ -27,13 +27,7 @@ const categories = Array.from(new Set(allCategories));
 
     <hr class="w-full border border-primary-900 mb-16 max-sm:mb-10" />
 
-    <!-- tags -->
-    <div
-      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
-    >
-      <h2 class="font-bold text-5xl text-primary-900">Recent Posts</h2>
-      <CategoryList {categories} />
-    </div>
+    <CategoryList title="Recent Posts" {categories} />
 
     <div class="mb-32">
       <PostList posts={posts} />

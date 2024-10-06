@@ -35,13 +35,7 @@ const categories = Array.from(new Set(allCategories));
       Here is the place for some description, 10 to 15 words max.
     </p>
 
-    <!-- tags -->
-    <div
-      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
-    >
-      <h2 class="font-bold text-5xl text-primary-900">Tags</h2>
-      <CategoryList {categories} />
-    </div>
+    <CategoryList title="Tags" {categories} />
 
     <!-- pagination  -->
     <div class="mb-12">
