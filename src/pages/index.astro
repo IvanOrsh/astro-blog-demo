@@ -5,10 +5,14 @@ import Layout from "@layouts/Layout.astro";
 import Main from "@components/Main.astro";
 import H1 from "@components/H1.astro";
 import FeaturedPost from "@components/FeaturedPost.astro";
+import CategoryList from "@components/CategoryList.astro";
+import PostList from "@components/PostList.astro";
 
 const allPosts = await getCollection("posts");
 const featuredPost = allPosts.filter((post) => post.data.featured);
 const posts = allPosts.filter((post) => !post.data.featured).slice(0, 4);
+const allCategories = posts.flatMap((post) => post.data.categories);
+const categories = Array.from(new Set(allCategories));
 ---
 
 <Layout title="Welcome to Astro.">
@@ -21,6 +25,26 @@ const posts = allPosts.filter((post) => !post.data.featured).slice(0, 4);
 
     {featuredPost.map((post) => <FeaturedPost {post} />)}
 
-    <hr class="w-full border border-primary-900 mb-16" />
+    <hr class="w-full border border-primary-900 mb-16 max-sm:mb-10" />
+
+    <!-- tags -->
+    <div
+      class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
+    >
+      <h2 class="font-bold text-5xl text-primary-900">Recent Posts</h2>
+      <CategoryList {categories} />
+    </div>
+
+    <div class="mb-32">
+      <PostList posts={posts} />
+    </div>
+
+    <div class="flex justify-end mb-60 max-sm:mb-36">
+      <a
+        href="/blog"
+        class="bg-primary-900 text-white py-3 px-6 rounded-xl text-xl"
+        >Read more</a
+      >
+    </div>
   </Main>
 </Layout>
