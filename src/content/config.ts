@@ -10,18 +10,18 @@ const authorsCollection = defineCollection({
 });
 
 const postsCollection = defineCollection({
-  schema: ({ image }) =>
-    z.object({
-      author: z.string(),
-      categories: z.array(z.string()),
-      date: z
-        .string()
-        .transform((str) => format(new Date(str), "MMMM d, yyyy")),
-      featured: z.boolean().default(false),
-      image: image(),
-      title: z.string(),
-      description: z.string(),
+  schema: z.object({
+    author: z.string(),
+    categories: z.array(z.string()),
+    date: z.string().transform((str) => format(new Date(str), "MMMM d, yyyy")),
+    featured: z.boolean().default(false),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
     }),
+    title: z.string(),
+    description: z.string(),
+  }),
 });
 
 export const collections = {

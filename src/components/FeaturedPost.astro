@@ -1,23 +1,30 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
 import CategoryList from "./CategoryList.astro";
+
+import { getLocalImage } from "@utils/getLocalImage";
 
 interface Props {
   post: CollectionEntry<"posts">;
 }
 
 const { post } = Astro.props;
+
+const imageImport = await getLocalImage(post.data.image.src);
 ---
 
 <article
   class="mb-28 grid grid-cols-2 gap-x-12 gap-y-5 max-lg:grid-cols-1 max-sm:mb-12"
 >
   <a href={`/blog/${post.slug}`}>
-    <img
-      src={post.data.image.src}
+    <Image
+      src={imageImport}
       alt={post.data.title}
       width={1024}
-      height={1024 / 2}
+      height={1024 / 1.5}
+      format="webp"
       class="rounded-2xl aspect-thumbnail object-cover"
     />
   </a>

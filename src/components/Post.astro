@@ -1,20 +1,25 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+import { getLocalImage } from "@utils/getLocalImage";
 
 interface Props {
   post: CollectionEntry<"posts">;
 }
 
 const { post }: Props = Astro.props;
+const imageImport = await getLocalImage(post.data.image.src);
 ---
 
 <article>
   <a href={`/blog/${post.slug}`}>
-    <img
-      src={post.data.image.src}
+    <Image
+      src={imageImport}
       alt={post.data.title}
-      width={1024}
-      height={1024 / 2}
+      width={600}
+      height={600 / 1.5}
+      format="webp"
       class="rounded-2xl shadow-xl mb-6 aspect-thumbnail object-cover"
     />
   </a>
