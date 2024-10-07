@@ -3,7 +3,9 @@ author: michael-scott
 categories: ["latest", "insights"]
 date: 08/10/2021
 featured: true
-image: ./images/producer.jpg
+image:
+  src: /src/assets/posts/images/producer.jpg
+  alt: producer
 title: The art of music production
 description: yayo dude
 ---

@@ -3,7 +3,9 @@ author: michael-scott
 categories: ["studio tips"]
 date: 08/10/2021
 featured: false
-image: ./images/band.jpg
+image:
+  src: /src/assets/posts/images/band.jpg
+  alt: band
 title: Collaboration in music production
 description: Understand the importance of collaboration between creative personas and artists
 ---

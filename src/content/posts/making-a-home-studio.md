@@ -3,7 +3,9 @@ author: dwight-schrute
 categories: ["studio tips", "testing"]
 date: 08/10/2021
 featured: false
-image: ./images/studio.jpg
+image:
+  src: /src/assets/posts/images/studio.jpg
+  alt: studio
 title: Making a home studio
 description: Some people play the bass, some people play the congo, but
 ---

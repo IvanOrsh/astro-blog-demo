@@ -3,7 +3,9 @@ author: dwight-schrute
 categories: ["studio tips"]
 date: 08/10/2022
 featured: false
-image: ./images/photoshoot.jpg
+image:
+  src: /src/assets/posts/images/photoshoot.jpg
+  alt: photoshoot
 title: Behind-the-scenes with our artists 2
 description: Understand the importance of collaboration between creative personas and artists
 ---

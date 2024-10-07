@@ -3,7 +3,9 @@ author: pam-beesely
 categories: ["career advice"]
 date: 08/10/2021
 featured: false
-image: ./images/record.jpg
+image:
+  src: /src/assets/posts/images/record.jpg
+  alt: record
 title: Creating a successful music brand
 description: Understand the importance of collaboration between creative personas and artists
 ---

@@ -3,7 +3,9 @@ author: jim-halpert
 categories: ["career advice"]
 date: 08/10/2021
 featured: false
-image: ./images/guitarist.jpg
+image:
+  src: /src/assets/posts/images/guitarist.jpg
+  alt: guitarist
 title: Guitar solos are still awesome
 description: Understand how to play chimichanga
 ---

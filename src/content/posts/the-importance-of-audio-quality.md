@@ -3,7 +3,9 @@ author: pam-beesely
 categories: ["insights"]
 date: 08/10/2021
 featured: false
-image: ./images/speaker.jpg
+image:
+  src: /src/assets/posts/images/speaker.jpg
+  alt: speaker
 title: The importance of audio quality
 description: Just die already
 ---

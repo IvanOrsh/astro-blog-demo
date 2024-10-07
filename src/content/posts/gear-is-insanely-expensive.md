@@ -3,7 +3,9 @@ author: dwight-schrute
 categories: ["career advice"]
 date: 08/10/2021
 featured: false
-image: ./images/gear.jpg
+image:
+  src: /src/assets/posts/images/gear.jpg
+  alt: gear
 title: Gear is insanely expensive
 description: Understand the importance of collaboration between creative personas and artists
 ---

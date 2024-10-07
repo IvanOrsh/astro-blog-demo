@@ -3,7 +3,9 @@ author: jim-halpert
 categories: ["insights"]
 date: 08/10/2021
 featured: false
-image: ./images/concert.jpg
+image:
+  src: /src/assets/posts/images/concert.jpg
+  alt: concert
 title: Live music is crucial
 description: Sometimes live gigs are just horrid
 ---
